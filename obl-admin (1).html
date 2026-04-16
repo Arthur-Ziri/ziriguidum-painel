@@ -3,20 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ziriguidum — Admin</title>
+<title>OBL Produtora — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --black:#0D0D0D;--surface:#1A1A1A;--surface2:#212121;
   --border:#2E2E2E;--text:#F5F5F5;--muted:#666;--muted2:#999;
-  --c-done:#4BC87A;--c-progress:#4B8FE8;--c-approval:#E8B84B;
+  --c-done:#E8B84B;--c-progress:#4B8FE8;--c-approval:#E8B84B;
   --fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;
 }
 body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:14px;min-height:100vh}
 
 .header{background:rgba(13,13,13,.96);border-bottom:1px solid var(--border);padding:12px 32px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:10}
-.logo{font-family:var(--fd);font-size:26px;letter-spacing:.05em}
+.logo{font-family:var(--fd);font-size:26px;letter-spacing:.05em;color:#E8B84B}
 .logo-sep{width:1px;height:24px;background:var(--border)}
 .header-title{font-size:13px;color:var(--muted2)}
 .main{max-width:860px;margin:0 auto;padding:32px 24px 80px}
@@ -25,15 +25,14 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .steps{display:flex;align-items:center;margin-bottom:28px}
 .step{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);white-space:nowrap}
 .step-num{width:22px;height:22px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;transition:all .25s}
-.step.active .step-num{background:var(--c-done);border-color:var(--c-done);color:#000}
+.step.active .step-num{background:#E8B84B;border-color:#E8B84B;color:#000}
 .step.active{color:var(--text)}
-.step.done .step-num{background:rgba(75,200,122,.15);border-color:var(--c-done);color:var(--c-done)}
+.step.done .step-num{background:rgba(232,184,75,.15);border-color:#E8B84B;color:#E8B84B}
 .step.done{color:var(--muted2)}
 .step-line{flex:1;height:1px;background:var(--border);margin:0 12px}
 
 .section-title{font-family:var(--fd);font-size:32px;letter-spacing:.04em;margin-bottom:4px}
 .section-sub{font-size:13px;color:var(--muted2);margin-bottom:24px}
-
 .panel{display:none}.panel.active{display:block}
 
 /* FORM */
@@ -43,12 +42,13 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .form-full{grid-column:1/-1}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:.1em}
-.field input{background:#242424;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:9px 12px;font-size:13px;font-family:var(--fb);transition:border-color .2s;outline:none;width:100%}
-.field input:focus{border-color:#555}
+.field input,.field select{background:#242424;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:9px 12px;font-size:13px;font-family:var(--fb);transition:border-color .2s;outline:none;width:100%}
+.field input:focus,.field select:focus{border-color:#555}
 .field input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.5}
+.field select option{background:#242424}
 
 .btn-row{display:flex;gap:10px;margin-top:20px}
-.btn-primary{flex:1;background:var(--c-done);color:#000;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:var(--fb);cursor:pointer;transition:opacity .2s}
+.btn-primary{flex:1;background:#E8B84B;color:#000;border:none;border-radius:8px;padding:12px;font-size:13px;font-weight:600;font-family:var(--fb);cursor:pointer;transition:opacity .2s}
 .btn-primary:hover{opacity:.85}
 .btn-primary:disabled{opacity:.4;cursor:not-allowed}
 .btn-secondary{background:transparent;color:var(--muted2);border:1px solid var(--border);border-radius:8px;padding:12px 20px;font-size:13px;font-family:var(--fb);cursor:pointer;transition:all .2s}
@@ -57,21 +57,21 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 /* SCOPE */
 .scope-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .scope-summary{font-size:12px;color:var(--muted2)}
-.scope-summary span{color:var(--c-done);font-weight:600}
+.scope-summary span{color:#E8B84B;font-weight:600}
 .btn-toggle-all{background:transparent;border:1px solid var(--border);color:var(--muted2);border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;font-family:var(--fb);transition:all .15s}
 .btn-toggle-all:hover{border-color:#555;color:var(--text)}
 
 .phase-block{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color .2s,opacity .2s}
-.phase-block.all-checked{border-color:rgba(75,200,122,.3)}
-.phase-block.partial{border-color:rgba(232,184,75,.25)}
+.phase-block.all-checked{border-color:rgba(232,184,75,.35)}
+.phase-block.partial{border-color:rgba(232,184,75,.2)}
 .phase-block.none-checked{opacity:.5}
 
 .phase-row{display:flex;align-items:center;gap:12px;padding:12px 16px;background:var(--surface);cursor:default;user-select:none}
 .ph-check{width:18px;height:18px;border-radius:5px;border:1px solid var(--border);background:#242424;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;cursor:pointer}
 .ph-check:hover{border-color:#555}
-.ph-check.checked{background:var(--c-done);border-color:var(--c-done)}
-.ph-check.partial{background:rgba(232,184,75,.15);border-color:var(--c-approval);position:relative}
-.ph-check.partial::after{content:'–';color:var(--c-approval);font-size:12px;font-weight:700;line-height:1;position:absolute}
+.ph-check.checked{background:#E8B84B;border-color:#E8B84B}
+.ph-check.partial{background:rgba(232,184,75,.15);border-color:#E8B84B;position:relative}
+.ph-check.partial::after{content:'–';color:#E8B84B;font-size:12px;font-weight:700;line-height:1;position:absolute}
 .ph-check svg{display:none}.ph-check.checked svg{display:block}
 .ph-icon{font-size:15px;flex-shrink:0}
 .ph-name{flex:1;font-size:13px;font-weight:600;cursor:pointer}
@@ -85,7 +85,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .del-row{display:flex;align-items:flex-start;gap:10px;padding:7px 16px 7px 44px;cursor:pointer;transition:background .12s}
 .del-row:hover{background:rgba(255,255,255,.025)}
 .del-check{width:16px;height:16px;border-radius:4px;border:1px solid var(--border);background:#242424;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .15s}
-.del-check.checked{background:var(--c-done);border-color:var(--c-done)}
+.del-check.checked{background:#E8B84B;border-color:#E8B84B}
 .del-check svg{display:none}.del-check.checked svg{display:block}
 .del-label{flex:1;font-size:12px;color:var(--text);line-height:1.4;transition:all .15s}
 .del-label.unchecked{color:var(--muted);text-decoration:line-through;text-decoration-color:#333}
@@ -95,7 +95,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .add-input:focus{border-color:#555;border-style:solid}
 .add-input::placeholder{color:var(--muted)}
 .btn-add{background:transparent;border:1px solid var(--border);color:var(--muted2);border-radius:6px;padding:5px 10px;font-size:11px;cursor:pointer;font-family:var(--fb);transition:all .15s;white-space:nowrap;flex-shrink:0}
-.btn-add:hover{border-color:var(--c-done);color:var(--c-done)}
+.btn-add:hover{border-color:#E8B84B;color:#E8B84B}
 
 /* PROJECTS LIST */
 .divider{display:flex;align-items:center;gap:12px;margin-bottom:16px;margin-top:40px}
@@ -111,18 +111,16 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .proj-actions{display:flex;gap:8px;flex-shrink:0}
 .btn-action{background:#242424;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 12px;font-size:11px;cursor:pointer;transition:background .15s;font-family:var(--fb);white-space:nowrap}
 .btn-action:hover{background:#2E2E2E}
-.btn-open{background:rgba(75,200,122,.08);border-color:rgba(75,200,122,.2);color:var(--c-done)}
-.btn-open:hover{background:rgba(75,200,122,.15)}
+.btn-open{background:rgba(232,184,75,.08);border-color:rgba(232,184,75,.2);color:#E8B84B}
+.btn-open:hover{background:rgba(232,184,75,.15)}
 .btn-copy.copied{background:rgba(75,143,232,.1);border-color:rgba(75,143,232,.3);color:#7AAFF0}
 .btn-delete{background:rgba(232,84,84,.06);border-color:rgba(232,84,84,.18);color:#E85454}
 .btn-delete:hover{background:rgba(232,84,84,.14)}
 .loading{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px;padding:24px 0}
-.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--c-done);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
+.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:#E8B84B;border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 .toast{position:fixed;bottom:24px;right:24px;background:#222;border:1px solid #333;color:var(--text);padding:10px 16px;border-radius:8px;font-size:12px;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
-
 @media(max-width:600px){
   .form-grid{grid-template-columns:1fr}.form-full{grid-column:1}
   .header,.main{padding-left:16px;padding-right:16px}
@@ -134,25 +132,24 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 <body>
 
 <header class="header">
-  <div class="logo">ZIRIGUIDUM</div>
+  <div class="logo">OBL</div>
   <div class="logo-sep"></div>
   <div class="header-title">Painel Interno — Gestão de Projetos</div>
 </header>
 
 <main class="main">
-
   <div class="steps">
-    <div class="step active" id="step1"><div class="step-num">1</div> <span>Dados do projeto</span></div>
+    <div class="step active" id="step1"><div class="step-num">1</div><span>Dados do projeto</span></div>
     <div class="step-line"></div>
-    <div class="step" id="step2"><div class="step-num">2</div> <span>Escopo de entregas</span></div>
+    <div class="step" id="step2"><div class="step-num">2</div><span>Escopo de entregas</span></div>
     <div class="step-line"></div>
-    <div class="step" id="step3"><div class="step-num">3</div> <span>Revisar e criar</span></div>
+    <div class="step" id="step3"><div class="step-num">3</div><span>Revisar e criar</span></div>
   </div>
 
-  <!-- PANEL 1: DADOS -->
+  <!-- PANEL 1 -->
   <div class="panel active" id="panel1">
     <div class="section-title">Novo Projeto</div>
-    <div class="section-sub">Preencha os dados do evento para continuar.</div>
+    <div class="section-sub">Preencha os dados do projeto para continuar.</div>
     <div class="card">
       <div class="card-title">Dados do Projeto</div>
       <div class="form-grid">
@@ -162,19 +159,28 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
         </div>
         <div class="field">
           <label>Nome do Projeto</label>
-          <input type="text" id="projectName" placeholder="Ex: Convenção Anual 2026">
+          <input type="text" id="projectName" placeholder="Ex: Filme Institucional 2026">
         </div>
         <div class="field">
-          <label>Nome do Evento</label>
-          <input type="text" id="eventName" placeholder="Ex: Convenção Anual">
+          <label>Título do Vídeo</label>
+          <input type="text" id="videoTitle" placeholder="Ex: Manifesto de Marca">
         </div>
         <div class="field">
-          <label>Data do Evento</label>
-          <input type="date" id="eventDate">
+          <label>Data de Entrega</label>
+          <input type="date" id="deliveryDate">
         </div>
-        <div class="field form-full">
-          <label>Local do Evento</label>
-          <input type="text" id="eventLocation" placeholder="Ex: Centro de Convenções — Rio de Janeiro, RJ">
+        <div class="field">
+          <label>Formato</label>
+          <select id="format">
+            <option value="">Selecione...</option>
+            <option>Filme institucional</option>
+            <option>Vídeo de produto</option>
+            <option>Motion / animação</option>
+            <option>Conteúdo para redes sociais</option>
+            <option>Documentário</option>
+            <option>Vídeo de evento</option>
+            <option>Outro</option>
+          </select>
         </div>
       </div>
       <div class="btn-row">
@@ -183,10 +189,10 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
     </div>
   </div>
 
-  <!-- PANEL 2: ESCOPO -->
+  <!-- PANEL 2 -->
   <div class="panel" id="panel2">
     <div class="section-title">Escopo de Entregas</div>
-    <div class="section-sub">Desmarque o que não se aplica a este projeto. Você também pode adicionar entregáveis personalizados em cada fase.</div>
+    <div class="section-sub">Desmarque o que não se aplica. A fase de Captação vem desmarcada por padrão — marque se o projeto tiver gravação.</div>
     <div class="scope-header">
       <div class="scope-summary"><span id="selectedCount">0</span> entregáveis selecionados</div>
       <button class="btn-toggle-all" onclick="toggleAll()">Marcar / Desmarcar tudo</button>
@@ -198,7 +204,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
     </div>
   </div>
 
-  <!-- PANEL 3: REVISÃO -->
+  <!-- PANEL 3 -->
   <div class="panel" id="panel3">
     <div class="section-title">Revisar e Criar</div>
     <div class="section-sub">Confirme tudo antes de gerar o link do cliente.</div>
@@ -209,7 +215,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
     </div>
   </div>
 
-  <!-- LISTA DE PROJETOS -->
+  <!-- LISTA -->
   <div class="divider">
     <div class="divider-title">Projetos</div>
     <div class="divider-line"></div>
@@ -218,25 +224,54 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
   <div id="projectsList">
     <div class="loading"><div class="spinner"></div>Carregando projetos...</div>
   </div>
-
 </main>
 <div class="toast" id="toast"></div>
 
 <script>
 const SUPABASE_URL = 'https://ryjjswtyyazcrgdbwcxb.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_RM5fARjLJvp4xBFGpX-7Cg_EYGl2toD';
-const PAINEL_BASE  = window.location.origin + '/painel.html';
+const PAINEL_BASE  = window.location.origin + '/obl-painel.html';
 
 const CHECK_SVG = `<svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
+// phase_index, defaultChecked
 const PHASE_TEMPLATES = [
-  {name:"Briefing & Alinhamento",icon:"🎯",deliverables:["Reunião de briefing","Recebimento do Kit de Materiais do Cliente","Definição e aprovação do orçamento","Ficha técnica do evento","Cronograma final aprovado"]},
-  {name:"Comunicação & Identidade Visual",icon:"🎨",deliverables:["Conceito criativo (identidade visual do evento)","Convite oficial / Save the Date","Régua de comunicação pré-evento","Apresentações em PPT","Artes para as telas do evento","Artes para cenografia","Sinalização interna (banners, totens, placas direcionais)","Crachás e credenciais","Uniformes dos promotores","Brinde / kit do participante"]},
-  {name:"Cenografia & Ambientação",icon:"🏛️",deliverables:["Definição e aprovação do mobiliário","Estudo de planta do espaço","Proposta de ambientação (palco, ponto de mídia, lounges)","Renders 3D do evento","Memorial descritivo dos materiais"]},
-  {name:"Alimentos & Bebidas",icon:"🍽️",deliverables:["Definição do estilo de serviço","Cardápio definido e aprovado","Seleção de bebidas aprovada","Contratação do fornecedor de A&B","Degustação realizada"]},
-  {name:"Gestão de Fornecedores",icon:"🤝",deliverables:["Espaço / venue contratado","Audiovisual contratado","Equipe de promotores contratada","Serviço de receptivo confirmado","Atrações e/ou palestrantes contratados","Segurança e brigadistas contratados","Transfer e logística de convidados","Empresa de limpeza e infraestrutura"]},
-  {name:"Logística & Infraestrutura",icon:"⚙️",deliverables:["Alvará e licenças do evento","Seguro do evento contratado","Gerador de energia (quando necessário)","Plano de estacionamento e acesso","Plano de contingência aprovado"]},
-  {name:"Dia do Evento & Pós",icon:"⭐",deliverables:["Tempos e Movimentos Aprovados","Briefing da equipe operacional realizado","Ensaio técnico realizado","Cobertura fotográfica e vídeo","NPS respondida","Relatório de resultados entregue"]}
+  { name:"Briefing & Conceito", icon:"🎯", checked: true, deliverables:[
+    "Reunião de briefing",
+    "Recebimento de materiais do cliente",
+    "Definição de formato e duração",
+    "Conceito criativo aprovado",
+    "Orçamento aprovado",
+    "Cronograma aprovado"
+  ]},
+  { name:"Pré-produção", icon:"📋", checked: true, deliverables:[
+    "Roteiro aprovado",
+    "Storyboard aprovado",
+    "Moodboard aprovado",
+    "Trilha sonora aprovada",
+    "Locução aprovada",
+    "Locação definida",
+    "Casting definido"
+  ]},
+  { name:"Captação", icon:"🎬", checked: false, deliverables:[
+    "Ordem do dia enviada",
+    "Elementos de gravação confirmados",
+    "Gravação realizada",
+    "Material de câmera entregue à edição"
+  ]},
+  { name:"Edição & Motion", icon:"✂️", checked: true, deliverables:[
+    "Primeiro corte enviado via Frame.io",
+    "Primeiro corte aprovado",
+    "Versão com motion enviada via Frame.io",
+    "Versão com motion aprovada",
+    "Correção de cor e finalização de som concluídas"
+  ]},
+  { name:"Entrega & Pós", icon:"🚀", checked: true, deliverables:[
+    "Arquivo final entregue via Drive",
+    "Recebimento confirmado pelo cliente",
+    "NPS enviado via ClickUp",
+    "NPS respondido"
+  ]}
 ];
 
 let SCOPE = [];
@@ -244,12 +279,12 @@ let scopeBuilt = false;
 
 // ── NAVIGATION ──
 function goToScope() {
-  const v = ['clientName','projectName','eventName','eventDate','eventLocation'].map(id => document.getElementById(id).value.trim());
-  if (v.some(x => !x)) { showToast('⚠ Preencha todos os campos'); return; }
+  const vals = ['clientName','projectName','videoTitle','deliveryDate','format'].map(id => document.getElementById(id).value.trim());
+  if (vals.some(x => !x)) { showToast('⚠ Preencha todos os campos'); return; }
   if (!scopeBuilt) {
     SCOPE = PHASE_TEMPLATES.map(ph => ({
       name: ph.name, icon: ph.icon,
-      items: ph.deliverables.map(d => ({title: d, checked: true}))
+      items: ph.deliverables.map(d => ({ title: d, checked: ph.checked }))
     }));
     scopeBuilt = true;
   }
@@ -275,7 +310,7 @@ function goToPanel(n) {
   window.scrollTo({top:0, behavior:'smooth'});
 }
 
-// ── SCOPE RENDER ──
+// ── SCOPE ──
 function renderScope() {
   document.getElementById('scopeContainer').innerHTML = SCOPE.map((ph, pi) => buildPhaseHTML(ph, pi)).join('');
   updateCount();
@@ -286,13 +321,11 @@ function buildPhaseHTML(ph, pi) {
   const total   = ph.items.length;
   const state   = checked === 0 ? 'none-checked' : checked === total ? 'all-checked' : 'partial';
   const chkCls  = checked === 0 ? '' : checked === total ? 'checked' : 'partial';
-
   const rows = ph.items.map((item, ii) => `
     <div class="del-row" onclick="toggleItem(${pi},${ii})">
       <div class="del-check ${item.checked?'checked':''}" id="dc-${pi}-${ii}">${item.checked?CHECK_SVG:''}</div>
       <div class="del-label ${item.checked?'':'unchecked'}" id="dl-${pi}-${ii}">${item.title}</div>
     </div>`).join('');
-
   return `<div class="phase-block ${state} open" id="pb-${pi}">
     <div class="phase-row">
       <div class="ph-check ${chkCls}" id="phc-${pi}" onclick="togglePhase(${pi})">${chkCls==='checked'?CHECK_SVG:''}</div>
@@ -311,22 +344,17 @@ function buildPhaseHTML(ph, pi) {
   </div>`;
 }
 
-function toggleOpen(pi) {
-  document.getElementById('pb-' + pi).classList.toggle('open');
-}
+function toggleOpen(pi) { document.getElementById('pb-' + pi).classList.toggle('open'); }
 
 function togglePhase(pi) {
-  const ph = SCOPE[pi];
-  const allChecked = ph.items.every(i => i.checked);
-  ph.items.forEach(i => i.checked = !allChecked);
-  refreshPhase(pi);
-  updateCount();
+  const allChecked = SCOPE[pi].items.every(i => i.checked);
+  SCOPE[pi].items.forEach(i => i.checked = !allChecked);
+  refreshPhase(pi); updateCount();
 }
 
 function toggleItem(pi, ii) {
   SCOPE[pi].items[ii].checked = !SCOPE[pi].items[ii].checked;
-  refreshPhase(pi);
-  updateCount();
+  refreshPhase(pi); updateCount();
 }
 
 function refreshPhase(pi) {
@@ -335,20 +363,16 @@ function refreshPhase(pi) {
   const total   = ph.items.length;
   const state   = checked === 0 ? 'none-checked' : checked === total ? 'all-checked' : 'partial';
   const chkCls  = checked === 0 ? '' : checked === total ? 'checked' : 'partial';
-
   ph.items.forEach((item, ii) => {
     const dc = document.getElementById('dc-' + pi + '-' + ii);
     const dl = document.getElementById('dl-' + pi + '-' + ii);
     if (dc) { dc.className = 'del-check ' + (item.checked?'checked':''); dc.innerHTML = item.checked?CHECK_SVG:''; }
     if (dl) { dl.className = 'del-label ' + (item.checked?'':'unchecked'); }
   });
-
   const phc = document.getElementById('phc-' + pi);
   if (phc) { phc.className = 'ph-check ' + chkCls; phc.innerHTML = chkCls==='checked'?CHECK_SVG:''; }
-
   const pb = document.getElementById('pb-' + pi);
   if (pb) { pb.className = pb.className.replace(/all-checked|partial|none-checked/g,'').trim() + ' ' + state; }
-
   const pc = document.getElementById('phcount-' + pi);
   if (pc) pc.textContent = checked + '/' + total;
 }
@@ -360,18 +384,13 @@ function addItem(pi) {
   const ii = SCOPE[pi].items.length;
   SCOPE[pi].items.push({title, checked: true});
   inp.value = '';
-
   const addRow = document.querySelector(`#dlist-${pi} .add-row`);
   const row = document.createElement('div');
   row.className = 'del-row';
   row.onclick = () => toggleItem(pi, ii);
-  row.innerHTML = `
-    <div class="del-check checked" id="dc-${pi}-${ii}">${CHECK_SVG}</div>
-    <div class="del-label" id="dl-${pi}-${ii}">${title}</div>`;
+  row.innerHTML = `<div class="del-check checked" id="dc-${pi}-${ii}">${CHECK_SVG}</div><div class="del-label" id="dl-${pi}-${ii}">${title}</div>`;
   addRow.parentElement.insertBefore(row, addRow);
-  refreshPhase(pi);
-  updateCount();
-  inp.focus();
+  refreshPhase(pi); updateCount(); inp.focus();
 }
 
 function toggleAll() {
@@ -383,20 +402,18 @@ function toggleAll() {
 }
 
 function updateCount() {
-  const n = SCOPE.reduce((s, ph) => s + ph.items.filter(i => i.checked).length, 0);
-  document.getElementById('selectedCount').textContent = n;
+  document.getElementById('selectedCount').textContent = SCOPE.reduce((s, ph) => s + ph.items.filter(i => i.checked).length, 0);
 }
 
-// ── REVIEW RENDER ──
+// ── REVIEW ──
 function renderReview() {
   const cn = document.getElementById('clientName').value.trim();
   const pn = document.getElementById('projectName').value.trim();
-  const en = document.getElementById('eventName').value.trim();
-  const ed = document.getElementById('eventDate').value;
-  const el = document.getElementById('eventLocation').value.trim();
-  const ds = new Date(ed + 'T00:00:00').toLocaleDateString('pt-BR', {day:'2-digit',month:'long',year:'numeric'});
+  const vt = document.getElementById('videoTitle').value.trim();
+  const dd = document.getElementById('deliveryDate').value;
+  const fm = document.getElementById('format').value;
+  const ds = new Date(dd + 'T00:00:00').toLocaleDateString('pt-BR', {day:'2-digit',month:'long',year:'numeric'});
   const total = SCOPE.reduce((s, ph) => s + ph.items.filter(i => i.checked).length, 0);
-
   const phases = SCOPE.filter(ph => ph.items.some(i => i.checked)).map(ph => {
     const items = ph.items.filter(i => i.checked);
     return `<div style="margin-bottom:14px">
@@ -404,16 +421,15 @@ function renderReview() {
       ${items.map(i => `<div style="font-size:11px;color:var(--muted2);padding:2px 0 2px 12px;border-left:2px solid #2A2A2A">· ${i.title}</div>`).join('')}
     </div>`;
   }).join('');
-
   document.getElementById('reviewCard').innerHTML = `
     <div style="padding-bottom:16px;margin-bottom:16px;border-bottom:1px solid var(--border)">
       <div style="font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:12px">Dados do Projeto</div>
       <div style="display:grid;gap:5px;font-size:13px">
-        <div><span style="color:var(--muted2);min-width:60px;display:inline-block">Cliente</span>${cn}</div>
-        <div><span style="color:var(--muted2);min-width:60px;display:inline-block">Projeto</span>${pn}</div>
-        <div><span style="color:var(--muted2);min-width:60px;display:inline-block">Evento</span>${en}</div>
-        <div><span style="color:var(--muted2);min-width:60px;display:inline-block">Data</span>${ds}</div>
-        <div><span style="color:var(--muted2);min-width:60px;display:inline-block">Local</span>${el}</div>
+        <div><span style="color:var(--muted2);min-width:70px;display:inline-block">Cliente</span>${cn}</div>
+        <div><span style="color:var(--muted2);min-width:70px;display:inline-block">Projeto</span>${pn}</div>
+        <div><span style="color:var(--muted2);min-width:70px;display:inline-block">Vídeo</span>${vt}</div>
+        <div><span style="color:var(--muted2);min-width:70px;display:inline-block">Entrega</span>${ds}</div>
+        <div><span style="color:var(--muted2);min-width:70px;display:inline-block">Formato</span>${fm}</div>
       </div>
     </div>
     <div>
@@ -426,59 +442,46 @@ function renderReview() {
 async function createProject() {
   const btn = document.getElementById('btnCreate');
   btn.disabled = true; btn.textContent = 'Criando...';
-
   try {
-    const [project] = await api('POST', 'projects', {
-      client_name:    document.getElementById('clientName').value.trim(),
-      project_name:   document.getElementById('projectName').value.trim(),
-      event_name:     document.getElementById('eventName').value.trim(),
-      event_date:     document.getElementById('eventDate').value,
-      event_location: document.getElementById('eventLocation').value.trim()
+    const [project] = await api('POST', 'obl_projects', {
+      client_name:   document.getElementById('clientName').value.trim(),
+      project_name:  document.getElementById('projectName').value.trim(),
+      video_title:   document.getElementById('videoTitle').value.trim(),
+      delivery_date: document.getElementById('deliveryDate').value,
+      format:        document.getElementById('format').value
     });
-
     const deliverables = [];
     SCOPE.forEach((ph, pi) => {
       ph.items.forEach((item, ii) => {
-        if (item.checked) deliverables.push({
-          project_id: project.id,
-          phase_index: pi,
-          deliverable_index: ii,
-          title: item.title,
-          status: 'pending',
-          due_date: null
-        });
+        if (item.checked) deliverables.push({ project_id: project.id, phase_index: pi, deliverable_index: ii, title: item.title, status: 'pending', due_date: null });
       });
     });
-    await api('POST', 'deliverables', deliverables);
-
-    ['clientName','projectName','eventName','eventDate','eventLocation'].forEach(id => document.getElementById(id).value = '');
+    await api('POST', 'obl_deliverables', deliverables);
+    ['clientName','projectName','videoTitle','deliveryDate','format'].forEach(id => document.getElementById(id).value = '');
     scopeBuilt = false; SCOPE = [];
-
     showToast('✓ Projeto criado com sucesso!');
-    goToPanel(1);
-    loadProjects();
+    goToPanel(1); loadProjects();
   } catch(e) {
-    console.error(e);
-    showToast('Erro ao criar. Veja o console.');
+    console.error(e); showToast('Erro ao criar. Veja o console.');
   } finally {
     btn.disabled = false; btn.textContent = '✓ Criar Projeto e Gerar Link';
   }
 }
 
-// ── LOAD PROJECTS ──
+// ── LOAD ──
 async function loadProjects() {
   const list = document.getElementById('projectsList');
   try {
-    const projects = await api('GET', 'projects?order=created_at.desc');
+    const projects = await api('GET', 'obl_projects?order=created_at.desc');
     document.getElementById('projectsCount').textContent = projects.length + ' projeto(s)';
     if (!projects.length) { list.innerHTML = '<div class="empty">Nenhum projeto criado ainda.</div>'; return; }
     list.innerHTML = projects.map(p => {
       const url  = PAINEL_BASE + '?id=' + p.id;
-      const date = new Date(p.event_date + 'T00:00:00').toLocaleDateString('pt-BR');
+      const date = new Date(p.delivery_date + 'T00:00:00').toLocaleDateString('pt-BR');
       return `<div class="project-card">
         <div class="proj-info">
           <div class="proj-name">${p.client_name} — ${p.project_name}</div>
-          <div class="proj-meta">📅 ${date} &nbsp;·&nbsp; 📍 ${p.event_location}</div>
+          <div class="proj-meta">🎬 ${p.format} &nbsp;·&nbsp; 📅 Entrega: ${date}</div>
         </div>
         <div class="proj-actions">
           <button class="btn-action btn-open" onclick="window.open('${url}','_blank')">↗ Abrir</button>
@@ -503,7 +506,7 @@ function copyLink(url, id) {
 
 async function deleteProject(id, name) {
   if (!confirm('Excluir o projeto "' + name + '"?\nEsta ação não pode ser desfeita.')) return;
-  try { await api('DELETE', 'projects?id=eq.' + id); showToast('Projeto excluído.'); loadProjects(); }
+  try { await api('DELETE', 'obl_projects?id=eq.' + id); showToast('Projeto excluído.'); loadProjects(); }
   catch(e) { showToast('Erro ao excluir.'); }
 }
 

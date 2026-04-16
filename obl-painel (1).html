@@ -3,22 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ziriguidum — Painel do Projeto</title>
+<title>OBL Produtora — Painel do Projeto</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --black:#0D0D0D;--surface:#1A1A1A;--surface2:#212121;
   --border:#2E2E2E;--text:#F5F5F5;--muted:#666;--muted2:#999;
-  --c-progress:#4B8FE8;--c-approval:#E8B84B;--c-done:#4BC87A;--c-pending:#555;
+  --c-progress:#4B8FE8;--c-approval:#E8B84B;--c-done:#E8B84B;--c-pending:#555;
+  --accent:#E8B84B;
   --fd:'Bebas Neue',sans-serif;--fb:'DM Sans',sans-serif;
 }
 body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:14px;line-height:1.5;min-height:100vh}
 
 .loading-screen{position:fixed;inset:0;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;z-index:999}
 .loading-screen.hidden{display:none}
-.loading-logo{font-family:var(--fd);font-size:40px;letter-spacing:.1em}
-.spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--c-done);border-radius:50%;animation:spin .8s linear infinite}
+.loading-logo{font-family:var(--fd);font-size:40px;letter-spacing:.1em;color:#E8B84B}
+.spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:#E8B84B;border-radius:50%;animation:spin .8s linear infinite}
 .loading-msg{font-size:12px;color:var(--muted)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .error-screen{position:fixed;inset:0;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;z-index:999}
@@ -28,7 +29,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 
 /* HEADER */
 .header{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 32px;display:flex;align-items:center;gap:20px}
-.logo{font-family:var(--fd);font-size:26px;letter-spacing:.05em;line-height:1;flex-shrink:0}
+.logo{font-family:var(--fd);font-size:26px;letter-spacing:.05em;line-height:1;flex-shrink:0;color:#E8B84B}
 .logo-sep{width:1px;height:24px;background:var(--border);flex-shrink:0}
 .hproj{flex:1;min-width:0}
 .hproj-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -36,8 +37,8 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .hprog{display:flex;align-items:center;gap:10px;flex-shrink:0}
 .hbar-lbl{font-size:10px;color:var(--muted);margin-bottom:3px}
 .hbar-track{width:120px;height:4px;background:var(--border);border-radius:99px;overflow:hidden}
-.hbar-fill{height:100%;background:var(--c-done);border-radius:99px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
-.hpct{font-family:var(--fd);font-size:22px;color:var(--c-done);line-height:1}
+.hbar-fill{height:100%;background:#E8B84B;border-radius:99px;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.hpct{font-family:var(--fd);font-size:22px;color:#E8B84B;line-height:1}
 .hev{flex-shrink:0;text-align:right}
 .hev-cd{font-family:var(--fd);font-size:20px;color:#E8B84B;line-height:1}
 .hev-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
@@ -48,9 +49,10 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .hero-title span{color:#E8B84B}
 .hero-meta{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:11px;padding:3px 10px;border-radius:99px;border:1px solid var(--border);color:var(--muted2);background:var(--surface)}
+.chip.accent{border-color:rgba(232,184,75,.3);color:#E8B84B;background:rgba(232,184,75,.08)}
 .hero-r{text-align:right}
 .hero-edate{font-family:var(--fd);font-size:13px;letter-spacing:.08em;color:var(--muted2);text-transform:uppercase;margin-bottom:4px}
-.hero-eloc{font-size:11px;color:var(--muted)}
+.hero-efmt{font-size:11px;color:var(--muted)}
 
 .alert{margin:14px 32px 0;padding:10px 16px;background:rgba(232,184,75,.08);border:1px solid rgba(232,184,75,.25);border-radius:8px;font-size:12px;color:#E8B84B;display:flex;align-items:center;gap:8px}
 .alert.hidden{display:none}
@@ -61,9 +63,9 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
 .stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:10px}
 .sdot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
-.sdot.done{background:var(--c-done)}.sdot.progress{background:var(--c-progress)}.sdot.approval{background:var(--c-approval)}.sdot.pending{background:var(--c-pending)}
+.sdot.done{background:#E8B84B}.sdot.progress{background:var(--c-progress)}.sdot.approval{background:#E8B84B}.sdot.pending{background:var(--c-pending)}
 .snum{font-family:var(--fd);font-size:28px;line-height:1}
-.snum.done{color:var(--c-done)}.snum.progress{color:var(--c-progress)}.snum.approval{color:var(--c-approval)}.snum.pending{color:var(--muted2)}
+.snum.done{color:#E8B84B}.snum.progress{color:var(--c-progress)}.snum.approval{color:#E8B84B}.snum.pending{color:var(--muted2)}
 .slbl{font-size:10px;color:var(--muted2);line-height:1.3}
 
 .sec-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin-bottom:10px;margin-top:24px;display:flex;align-items:center;gap:10px}
@@ -81,7 +83,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .ph-sub{font-size:11px;color:var(--muted2);margin-top:1px}
 .ph-mini{display:flex;align-items:center;gap:8px;flex-shrink:0}
 .ph-bar-track{width:56px;height:3px;background:var(--border);border-radius:99px;overflow:hidden}
-.ph-bar-fill{height:100%;border-radius:99px;background:var(--c-done);transition:width .6s ease}
+.ph-bar-fill{height:100%;border-radius:99px;background:#E8B84B;transition:width .6s ease}
 .ph-pct{font-size:11px;color:var(--muted2);min-width:26px;text-align:right}
 .ph-chev{color:var(--muted);font-size:9px;transition:transform .25s;flex-shrink:0}
 .phase.open .ph-chev{transform:rotate(180deg)}
@@ -98,14 +100,13 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .deliverable:hover{background:rgba(255,255,255,.02)}
 .del-title{flex:1;font-size:13px;color:var(--text);line-height:1.4}
 .del-title.done{color:var(--muted);text-decoration:line-through;text-decoration-color:#333}
-.del-note{font-size:11px;color:var(--muted2);margin-top:2px;font-style:italic}
 
 /* DUE DATE */
 .due-date{width:80px;flex-shrink:0;font-size:11px;padding:3px 8px;border-radius:6px;text-align:center;border:1px solid transparent;margin-top:2px;cursor:pointer;transition:opacity .15s;user-select:none}
 .due-date:hover{opacity:.75}
 .due-empty{color:var(--muted);border:1px dashed #333;font-size:10px}
-.due-ok{color:#4BC87A;border-color:rgba(75,200,122,.25);background:rgba(75,200,122,.08)}
-.due-soon{color:#E8B84B;border-color:rgba(232,184,75,.3);background:rgba(232,184,75,.08)}
+.due-ok{color:#E8B84B;border-color:rgba(232,184,75,.3);background:rgba(232,184,75,.08)}
+.due-soon{color:#E8B84B;border-color:rgba(232,184,75,.4);background:rgba(232,184,75,.14)}
 .due-overdue{color:#E85454;border-color:rgba(232,84,84,.3);background:rgba(232,84,84,.08)}
 .due-done{color:var(--muted);border-color:transparent;text-decoration:line-through}
 
@@ -116,12 +117,12 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .status-badge.pending{background:rgba(85,85,85,.15);border-color:rgba(85,85,85,.3);color:#888}
 .status-badge.progress{background:rgba(75,143,232,.12);border-color:rgba(75,143,232,.3);color:#7AAFF0}
 .status-badge.approval{background:rgba(232,184,75,.12);border-color:rgba(232,184,75,.3);color:#E8B84B}
-.status-badge.done{background:rgba(75,200,122,.1);border-color:rgba(75,200,122,.25);color:var(--c-done)}
+.status-badge.done{background:rgba(232,184,75,.15);border-color:rgba(232,184,75,.35);color:#E8B84B}
 .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .status-badge.pending .dot{background:#666}
 .status-badge.progress .dot{background:var(--c-progress);animation:blink 1.8s ease infinite}
-.status-badge.approval .dot{background:var(--c-approval);animation:blink 1.8s ease infinite}
-.status-badge.done .dot{background:var(--c-done)}
+.status-badge.approval .dot{background:#E8B84B;animation:blink 1.8s ease infinite}
+.status-badge.done .dot{background:#E8B84B}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 .status-dropdown{display:none;position:fixed;top:0;left:0;background:#222;border:1px solid #333;border-radius:8px;overflow:hidden;z-index:500;min-width:165px;box-shadow:0 8px 32px rgba(0,0,0,.8)}
@@ -137,7 +138,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .date-picker-wrap input[type=date]{background:#2A2A2A;border:1px solid #444;border-radius:6px;color:var(--text);padding:6px 10px;font-size:13px;font-family:var(--fb);width:100%;cursor:pointer}
 .date-picker-wrap input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.6}
 .date-picker-actions{display:flex;gap:6px;margin-top:2px}
-.btn-save{flex:1;background:var(--c-done);color:#000;border:none;border-radius:6px;padding:6px;font-size:12px;font-weight:600;cursor:pointer}
+.btn-save{flex:1;background:#E8B84B;color:#000;border:none;border-radius:6px;padding:6px;font-size:12px;font-weight:600;cursor:pointer}
 .btn-clear{background:#333;color:var(--muted2);border:none;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer}
 
 .saving{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;border:1px solid #333;color:var(--muted2);padding:7px 16px;border-radius:99px;font-size:11px;z-index:998;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
@@ -149,7 +150,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 .leg-sep{width:1px;height:14px;background:var(--border);margin:0 2px}
 
 .footer{border-top:1px solid var(--border);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted)}
-.footer-logo{font-family:var(--fd);font-size:18px;color:var(--text);letter-spacing:.05em}
+.footer-logo{font-family:var(--fd);font-size:18px;color:#E8B84B;letter-spacing:.05em}
 
 .toast{position:fixed;bottom:24px;right:24px;background:#222;border:1px solid #333;color:var(--text);padding:9px 14px;border-radius:8px;font-size:12px;z-index:999;opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none}
 .toast.show{opacity:1;transform:translateY(0)}
@@ -168,7 +169,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 <body>
 
 <div class="loading-screen" id="loadingScreen">
-  <div class="loading-logo">ZIRIGUIDUM</div>
+  <div class="loading-logo">OBL</div>
   <div class="spinner"></div>
   <div class="loading-msg">Carregando projeto...</div>
 </div>
@@ -178,7 +179,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 </div>
 
 <header class="header" id="appHeader" style="display:none">
-  <div class="logo">ZIRIGUIDUM</div>
+  <div class="logo">OBL</div>
   <div class="logo-sep"></div>
   <div class="hproj">
     <div class="hproj-name" id="hProjName">—</div>
@@ -193,7 +194,7 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
   </div>
   <div class="hev">
     <div class="hev-cd" id="hCd">— dias</div>
-    <div class="hev-lbl">para o evento</div>
+    <div class="hev-lbl">para a entrega</div>
   </div>
 </header>
 
@@ -204,13 +205,13 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
   </div>
   <div class="hero-r">
     <div class="hero-edate" id="heroDate">—</div>
-    <div class="hero-eloc" id="heroLoc">—</div>
+    <div class="hero-efmt" id="heroFmt">—</div>
   </div>
 </section>
 
 <div class="alert hidden" id="approvalAlert">
   <span>⏳</span>
-  <span><strong>Ação necessária:</strong> Itens <strong>Aguardando Aprovação</strong> estão pausando o cronograma.</span>
+  <span><strong>Ação necessária:</strong> Itens <strong>Aguardando Aprovação</strong> estão pausando a produção.</span>
 </div>
 
 <main class="main" id="appMain" style="display:none">
@@ -226,20 +227,19 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
     <span style="font-size:11px;color:var(--muted2);">Status →</span>
     <div class="leg-item"><div class="leg-dot" style="background:#555"></div>Não iniciado</div>
     <div class="leg-item"><div class="leg-dot" style="background:var(--c-progress)"></div>Em andamento</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--c-approval)"></div>Aguard. aprovação</div>
-    <div class="leg-item"><div class="leg-dot" style="background:var(--c-done)"></div>Concluído</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#E8B84B"></div>Aguard. aprovação</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#E8B84B;opacity:.6"></div>Concluído</div>
     <div class="leg-sep"></div>
     <span style="font-size:11px;color:var(--muted2);">Previsão →</span>
-    <div class="leg-item"><div class="leg-dot" style="background:#4BC87A"></div>No prazo</div>
-    <div class="leg-item"><div class="leg-dot" style="background:#E8B84B"></div>Vence amanhã</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#E8B84B"></div>No prazo</div>
     <div class="leg-item"><div class="leg-dot" style="background:#E85454"></div>Atrasado</div>
   </div>
 </main>
 
 <footer class="footer" id="appFooter" style="display:none">
-  <div class="footer-logo">ZIRIGUIDUM</div>
+  <div class="footer-logo">OBL</div>
   <div id="footerText">Painel de acompanhamento</div>
-  <div>projetos que encantam</div>
+  <div>produção audiovisual</div>
 </footer>
 
 <div class="date-picker-wrap" id="datePicker">
@@ -258,75 +258,51 @@ body{background:var(--black);color:var(--text);font-family:var(--fb);font-size:1
 const SUPABASE_URL = 'https://ryjjswtyyazcrgdbwcxb.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_RM5fARjLJvp4xBFGpX-7Cg_EYGl2toD';
 
-// Master template — used to look up title/note by phase_index + deliverable_index
 const PHASE_TEMPLATES = [
-  {name:"Briefing & Alinhamento",icon:"🎯",deliverables:[
+  {name:"Briefing & Conceito",icon:"🎯",deliverables:[
     {title:"Reunião de briefing"},
-    {title:"Recebimento do Kit de Materiais do Cliente",note:"Logos, brand book e referências enviados pelo cliente."},
-    {title:"Definição e aprovação do orçamento"},
-    {title:"Ficha técnica do evento",note:"Capacidade, formato, horários e perfil do público."},
-    {title:"Cronograma final aprovado"}
+    {title:"Recebimento de materiais do cliente"},
+    {title:"Definição de formato e duração"},
+    {title:"Conceito criativo aprovado"},
+    {title:"Orçamento aprovado"},
+    {title:"Cronograma aprovado"}
   ]},
-  {name:"Comunicação & Identidade Visual",icon:"🎨",deliverables:[
-    {title:"Conceito criativo (identidade visual do evento)"},
-    {title:"Convite oficial / Save the Date"},
-    {title:"Régua de comunicação pré-evento"},
-    {title:"Apresentações em PPT"},
-    {title:"Artes para as telas do evento"},
-    {title:"Artes para cenografia"},
-    {title:"Sinalização interna (banners, totens, placas direcionais)"},
-    {title:"Crachás e credenciais"},
-    {title:"Uniformes dos promotores"},
-    {title:"Brinde / kit do participante"}
+  {name:"Pré-produção",icon:"📋",deliverables:[
+    {title:"Roteiro aprovado"},
+    {title:"Storyboard aprovado"},
+    {title:"Moodboard aprovado"},
+    {title:"Trilha sonora aprovada"},
+    {title:"Locução aprovada"},
+    {title:"Locação definida"},
+    {title:"Casting definido"}
   ]},
-  {name:"Cenografia & Ambientação",icon:"🏛️",deliverables:[
-    {title:"Definição e aprovação do mobiliário"},
-    {title:"Estudo de planta do espaço"},
-    {title:"Proposta de ambientação (palco, ponto de mídia, lounges)"},
-    {title:"Renders 3D do evento"},
-    {title:"Memorial descritivo dos materiais",note:"Especificação técnica para os fornecedores."}
+  {name:"Captação",icon:"🎬",deliverables:[
+    {title:"Ordem do dia enviada"},
+    {title:"Elementos de gravação confirmados"},
+    {title:"Gravação realizada"},
+    {title:"Material de câmera entregue à edição"}
   ]},
-  {name:"Alimentos & Bebidas",icon:"🍽️",deliverables:[
-    {title:"Definição do estilo de serviço",note:"Coquetel, jantar sentado, estações, etc."},
-    {title:"Cardápio definido e aprovado"},
-    {title:"Seleção de bebidas aprovada"},
-    {title:"Contratação do fornecedor de A&B"},
-    {title:"Degustação realizada"}
+  {name:"Edição & Motion",icon:"✂️",deliverables:[
+    {title:"Primeiro corte enviado via Frame.io"},
+    {title:"Primeiro corte aprovado"},
+    {title:"Versão com motion enviada via Frame.io"},
+    {title:"Versão com motion aprovada"},
+    {title:"Correção de cor e finalização de som concluídas"}
   ]},
-  {name:"Gestão de Fornecedores",icon:"🤝",deliverables:[
-    {title:"Espaço / venue contratado"},
-    {title:"Audiovisual contratado"},
-    {title:"Equipe de promotores contratada"},
-    {title:"Serviço de receptivo confirmado"},
-    {title:"Atrações e/ou palestrantes contratados"},
-    {title:"Segurança e brigadistas contratados"},
-    {title:"Transfer e logística de convidados"},
-    {title:"Empresa de limpeza e infraestrutura"}
-  ]},
-  {name:"Logística & Infraestrutura",icon:"⚙️",deliverables:[
-    {title:"Alvará e licenças do evento"},
-    {title:"Seguro do evento contratado",note:"Item frequentemente esquecido — pode gerar grandes problemas se ausente."},
-    {title:"Gerador de energia (quando necessário)"},
-    {title:"Plano de estacionamento e acesso"},
-    {title:"Plano de contingência aprovado"}
-  ]},
-  {name:"Dia do Evento & Pós",icon:"⭐",deliverables:[
-    {title:"Tempos e Movimentos Aprovados",note:"Roteiro minuto a minuto do evento."},
-    {title:"Briefing da equipe operacional realizado"},
-    {title:"Ensaio técnico realizado"},
-    {title:"Cobertura fotográfica e vídeo"},
-    {title:"NPS respondida"},
-    {title:"Relatório de resultados entregue"}
+  {name:"Entrega & Pós",icon:"🚀",deliverables:[
+    {title:"Arquivo final entregue via Drive"},
+    {title:"Recebimento confirmado pelo cliente"},
+    {title:"NPS enviado via ClickUp"},
+    {title:"NPS respondido"}
   ]}
 ];
 
 const STATUS_LABELS = {pending:'Não iniciado',progress:'Em andamento',approval:'Aguard. aprovação',done:'Concluído'};
-const STATUS_COLORS = {pending:'#555',progress:'#4B8FE8',approval:'#E8B84B',done:'#4BC87A'};
+const STATUS_COLORS = {pending:'#555',progress:'#4B8FE8',approval:'#E8B84B',done:'#E8B84B'};
 const TODAY    = new Date().toISOString().split('T')[0];
 const TOMORROW = new Date(Date.now()+86400000).toISOString().split('T')[0];
 
 let PROJECT_ID = null;
-// PHASES_DATA: [{phaseIndex, name, icon, items:[{deliverableIndex, title, note, status, due_date, db_id}]}]
 let PHASES_DATA = [];
 let activeDuePill = null;
 
@@ -345,23 +321,20 @@ async function init() {
   if (!PROJECT_ID) { showError(); return; }
   try {
     const [projects, deliverables] = await Promise.all([
-      api('GET', 'projects?id=eq.' + PROJECT_ID),
-      api('GET', 'deliverables?project_id=eq.' + PROJECT_ID + '&order=phase_index.asc,deliverable_index.asc')
+      api('GET', 'obl_projects?id=eq.' + PROJECT_ID),
+      api('GET', 'obl_deliverables?project_id=eq.' + PROJECT_ID + '&order=phase_index.asc,deliverable_index.asc')
     ]);
     if (!projects || !projects.length) { showError(); return; }
 
-    // Build PHASES_DATA from actual DB rows
-    // Group by phase_index, look up title/note from template
     const phaseMap = {};
     deliverables.forEach(row => {
       const pi = row.phase_index;
       if (!phaseMap[pi]) phaseMap[pi] = [];
-      const tpl = PHASE_TEMPLATES[pi];
+      const tpl    = PHASE_TEMPLATES[pi];
       const delTpl = tpl ? tpl.deliverables[row.deliverable_index] : null;
       phaseMap[pi].push({
         deliverableIndex: row.deliverable_index,
         title:    row.title || (delTpl ? delTpl.title : ('Entregável ' + (row.deliverable_index + 1))),
-        note:     delTpl ? delTpl.note  : null,
         status:   row.status,
         due_date: row.due_date,
         db_id:    row.id
@@ -381,9 +354,7 @@ async function init() {
     render(projects[0]);
     document.getElementById('loadingScreen').classList.add('hidden');
     ['appHeader','appHero','appMain','appFooter'].forEach(id => document.getElementById(id).style.display = '');
-  } catch(e) {
-    console.error(e); showError();
-  }
+  } catch(e) { console.error(e); showError(); }
 }
 
 function dueCls(due, status) {
@@ -401,33 +372,28 @@ function dueLabel(due, status) {
 }
 
 function render(p) {
-  const ed   = new Date(p.event_date + 'T00:00:00');
+  const ed   = new Date(p.delivery_date + 'T00:00:00');
   const ds   = ed.toLocaleDateString('pt-BR', {day:'2-digit',month:'long',year:'numeric'});
   const diff = Math.max(0, Math.floor((ed - new Date()) / 86400000));
 
   document.getElementById('hProjName').textContent   = p.project_name;
   document.getElementById('hProjClient').textContent = p.client_name;
   document.getElementById('hCd').textContent         = diff + ' dias';
-  document.getElementById('heroTitle').innerHTML     = p.client_name + '<br><span>' + p.event_name + '</span>';
-  document.getElementById('heroMeta').innerHTML      = `<span class="chip">📅 ${ds}</span><span class="chip">📍 ${p.event_location}</span>`;
+  document.getElementById('heroTitle').innerHTML     = p.client_name + '<br><span>' + p.video_title + '</span>';
+  document.getElementById('heroMeta').innerHTML      = `<span class="chip accent">🎬 ${p.format}</span><span class="chip">📅 Entrega: ${ds}</span>`;
   document.getElementById('heroDate').textContent    = ds.toUpperCase();
-  document.getElementById('heroLoc').textContent     = p.event_location;
+  document.getElementById('heroFmt').textContent     = p.format;
   document.getElementById('footerText').textContent  = 'Painel de acompanhamento · ' + p.client_name;
 
   document.getElementById('phasesContainer').innerHTML = PHASES_DATA.map((ph, phIdx) => {
-    const done   = ph.items.filter(i => i.status === 'done').length;
-    const total  = ph.items.length;
-    const pct    = Math.round(done / total * 100);
-
-    const rows = ph.items.map((item, itemIdx) => {
+    const done  = ph.items.filter(i => i.status === 'done').length;
+    const total = ph.items.length;
+    const pct   = Math.round(done / total * 100);
+    const rows  = ph.items.map((item, itemIdx) => {
       const isDone = item.status === 'done';
       return `<div class="deliverable" data-ph="${phIdx}" data-it="${itemIdx}">
-        <div class="del-title${isDone?' done':''}">
-          ${item.title}${item.note?`<div class="del-note">${item.note}</div>`:''}
-        </div>
-        <div class="due-date ${dueCls(item.due_date,item.status)}" onclick="openDatePicker(this)">
-          ${dueLabel(item.due_date,item.status)}
-        </div>
+        <div class="del-title${isDone?' done':''}">${item.title}</div>
+        <div class="due-date ${dueCls(item.due_date,item.status)}" onclick="openDatePicker(this)">${dueLabel(item.due_date,item.status)}</div>
         <div class="status-wrap">
           <div class="status-badge ${item.status}" onclick="toggleDropdown(this,event)">
             <span class="dot"></span>${STATUS_LABELS[item.status]}
@@ -436,8 +402,7 @@ function render(p) {
             ${Object.entries(STATUS_LABELS).map(([k,v]) =>
               `<div class="status-option" onclick="setStatus(${phIdx},${itemIdx},'${k}',event)">
                 <span class="opt-dot" style="background:${STATUS_COLORS[k]}"></span>${v}
-              </div>`
-            ).join('')}
+              </div>`).join('')}
           </div>
         </div>
       </div>`;
@@ -466,11 +431,9 @@ function render(p) {
       </div>
     </div>`;
   }).join('');
-
   recalc();
 }
 
-// ── DROPDOWN ──
 document.addEventListener('click', e => {
   if (!e.target.closest('.status-wrap')) closeAllDropdowns();
   if (!e.target.closest('.due-date') && !e.target.closest('.date-picker-wrap')) closeDatePicker();
@@ -512,16 +475,13 @@ function setStatus(phIdx, itemIdx, status, e) {
   const item  = PHASES_DATA[phIdx].items[itemIdx];
   pill.className   = 'due-date ' + dueCls(item.due_date, status);
   pill.textContent = dueLabel(item.due_date, status);
-  closeAllDropdowns();
-  recalc();
-  saveItem(phIdx, itemIdx);
+  closeAllDropdowns(); recalc(); saveItem(phIdx, itemIdx);
 }
 
-// ── DATE PICKER ──
 function openDatePicker(pill) {
   closeDatePicker(); activeDuePill = pill;
-  const del    = pill.closest('.deliverable');
-  const phIdx  = +del.dataset.ph, itemIdx = +del.dataset.it;
+  const del   = pill.closest('.deliverable');
+  const phIdx = +del.dataset.ph, itemIdx = +del.dataset.it;
   document.getElementById('dateInput').value = PHASES_DATA[phIdx].items[itemIdx].due_date || '';
   const pk = document.getElementById('datePicker'), r = pill.getBoundingClientRect();
   pk.style.left = Math.max(8, Math.min(r.left, window.innerWidth - 210)) + 'px';
@@ -533,9 +493,9 @@ function openDatePicker(pill) {
 function closeDatePicker() { document.getElementById('datePicker').classList.remove('open'); activeDuePill = null; }
 function saveDate() {
   if (!activeDuePill) return;
-  const val    = document.getElementById('dateInput').value || null;
-  const del    = activeDuePill.closest('.deliverable');
-  const phIdx  = +del.dataset.ph, itemIdx = +del.dataset.it;
+  const val   = document.getElementById('dateInput').value || null;
+  const del   = activeDuePill.closest('.deliverable');
+  const phIdx = +del.dataset.ph, itemIdx = +del.dataset.it;
   PHASES_DATA[phIdx].items[itemIdx].due_date = val;
   activeDuePill.className   = 'due-date ' + dueCls(val, PHASES_DATA[phIdx].items[itemIdx].status);
   activeDuePill.textContent = dueLabel(val, PHASES_DATA[phIdx].items[itemIdx].status);
@@ -543,37 +503,34 @@ function saveDate() {
 }
 function clearDate() {
   if (!activeDuePill) return;
-  const del    = activeDuePill.closest('.deliverable');
-  const phIdx  = +del.dataset.ph, itemIdx = +del.dataset.it;
+  const del   = activeDuePill.closest('.deliverable');
+  const phIdx = +del.dataset.ph, itemIdx = +del.dataset.it;
   PHASES_DATA[phIdx].items[itemIdx].due_date = null;
   activeDuePill.className   = 'due-date due-empty';
   activeDuePill.textContent = '+ data';
   closeDatePicker(); saveItem(phIdx, itemIdx); showToast('Data removida');
 }
 
-// ── SAVE ──
 async function saveItem(phIdx, itemIdx) {
   const item = PHASES_DATA[phIdx].items[itemIdx];
   const ind  = document.getElementById('savingIndicator');
   ind.classList.add('show');
   try {
-    // Use db_id for direct update if available
     const path = item.db_id
-      ? `deliverables?id=eq.${item.db_id}`
-      : `deliverables?project_id=eq.${PROJECT_ID}&phase_index=eq.${PHASES_DATA[phIdx].phaseIndex}&deliverable_index=eq.${item.deliverableIndex}`;
+      ? `obl_deliverables?id=eq.${item.db_id}`
+      : `obl_deliverables?project_id=eq.${PROJECT_ID}&phase_index=eq.${PHASES_DATA[phIdx].phaseIndex}&deliverable_index=eq.${item.deliverableIndex}`;
     await api('PATCH', path, {status: item.status, due_date: item.due_date, updated_at: new Date().toISOString()});
   } catch(e) { console.error(e); showToast('⚠ Erro ao salvar'); }
   finally { ind.classList.remove('show'); }
 }
 
-// ── RECALC ──
 function recalc() {
   let done=0, progress=0, approval=0, pending=0, total=0;
   PHASES_DATA.forEach((ph, phIdx) => {
     let phDone = 0;
     ph.items.forEach(item => {
       total++;
-      if (item.status==='done')     { done++;     phDone++; }
+      if (item.status==='done')          { done++;     phDone++; }
       else if (item.status==='progress') progress++;
       else if (item.status==='approval') approval++;
       else pending++;
@@ -582,9 +539,9 @@ function recalc() {
     const bar = document.getElementById('phbar-'  + phIdx);
     const pEl = document.getElementById('phpct-'  + phIdx);
     const sub = document.getElementById('phsub-'  + phIdx);
-    if (bar) bar.style.width   = pct + '%';
-    if (pEl) pEl.textContent   = pct + '%';
-    if (sub) sub.textContent   = phDone + '/' + ph.items.length + ' entregas concluídas';
+    if (bar) bar.style.width = pct + '%';
+    if (pEl) pEl.textContent = pct + '%';
+    if (sub) sub.textContent = phDone + '/' + ph.items.length + ' entregas concluídas';
   });
   const gPct = total ? Math.round(done/total*100) : 0;
   document.getElementById('hbarFill').style.width  = gPct + '%';
